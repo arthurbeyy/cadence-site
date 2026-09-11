@@ -62,3 +62,16 @@ if (window.matchMedia("(pointer: fine)").matches && !window.matchMedia("(prefers
 }
 
 document.querySelector("#year").textContent = new Date().getFullYear();
+
+const demoVideo = document.querySelector("#demoVideo");
+if (demoVideo) {
+  Promise.all([0, 1, 2, 3].map((part) => fetch(`cadence_demo_v2.mp4.part${part}`).then((response) => {
+    if (!response.ok) throw new Error("Video unavailable");
+    return response.arrayBuffer();
+  }))).then((parts) => {
+    const videoBlob = new Blob(parts, { type: "video/mp4" });
+    demoVideo.src = URL.createObjectURL(videoBlob);
+  }).catch(() => {
+    demoVideo.insertAdjacentText("afterend", "La vidéo est momentanément indisponible.");
+  });
+}
