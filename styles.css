@@ -150,8 +150,8 @@ button, input { font: inherit; }
   *,*::before,*::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
 
-/* Mobile : rien ne doit dépasser la largeur de l'écran */
+/* Rien ne doit dépasser la largeur de l'écran (mobile et tablette) */
+html, body { overflow-x: clip; }
 @media (max-width: 720px) {
-  html, body { overflow-x: clip; }
   .hero-visual { margin-inline: -4%; }
 }
